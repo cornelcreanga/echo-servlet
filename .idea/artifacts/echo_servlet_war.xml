@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="echo-servlet:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="homework-echo-servlet.war">
+      <element id="artifact" artifact-name="echo-servlet:war exploded" />
+    </root>
+  </artifact>
+</component>
