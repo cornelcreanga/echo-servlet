@@ -9,8 +9,8 @@ import java.io.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 
 public class ReverseEchoServletTest {
 
@@ -36,6 +36,18 @@ public class ReverseEchoServletTest {
         reverseEchoServlet.doPost(req, resp);
         assertThat(responseText.toString(), equalTo(EXPECTED));
     }
+
+    @Test
+    public void testDoEmptyPost() throws Exception {
+        String TEST = "";
+        mockHttpRequest("POST", "/echo");
+
+        when(req.getReader()).thenReturn(new BufferedReader(new StringReader(TEST)));
+        when(req.getContentLength()).thenReturn(TEST.length());
+        reverseEchoServlet.doPost(req, resp);
+        verify(resp, times(1)).sendError(400);
+    }
+
 
     //todo - test also for status code c
 
